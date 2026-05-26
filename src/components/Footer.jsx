@@ -14,8 +14,9 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-secondary text-white mt-auto">
-      <div className="max-w-6xl mx-auto px-4 py-10">
+    <footer className="relative bg-secondary text-white mt-auto overflow-hidden">
+      <div className="absolute inset-0 dot-pattern opacity-[0.06] pointer-events-none" aria-hidden="true" />
+      <div className="relative max-w-6xl mx-auto px-4 py-10">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-16">
           {/* Logo */}
           <div className="shrink-0">

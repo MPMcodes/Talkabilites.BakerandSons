@@ -1,9 +1,9 @@
-import { useInView } from '../hooks/useInView'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import HeroBanner from '../components/HeroBanner'
 import StaffCard from '../components/StaffCard'
-import { Phone } from 'lucide-react'
+import Reveal from '../components/Reveal'
+import { Phone, Quote } from 'lucide-react'
 
 const LINDSAY_PHOTO = 'https://images.squarespace-cdn.com/content/v1/5f8397bd8502ed181768b927/7f3db0f5-4049-492d-bffe-25e05a3a26dd/Smiling+Woman+at+Sunset+Beach.png'
 const SARA_PHOTO = 'https://images.squarespace-cdn.com/content/v1/5f8397bd8502ed181768b927/e10613d6-a89c-4e47-aa5f-7fd81255d3b7/Sara.png'
@@ -27,14 +27,17 @@ Sara is passionate about working with young children and loves helping develop e
 Sara is licensed by the board of North Carolina and holds her Certificate of Clinical Competence from the American Speech-Language-Hearing Association. Sara lives in Zebulon, North Carolina. In her free time, she loves spending time with her husband, two kids, and two dogs!`
 
 function MissionSection() {
-  const [ref, visible] = useInView()
   return (
-    <section ref={ref} className={`fade-up max-w-3xl mx-auto px-4 py-14 text-center ${visible ? 'visible' : ''}`}>
-      <div className="w-12 h-1 bg-primary rounded-full mx-auto mb-6" />
-      <p className="font-heading font-semibold text-2xl md:text-3xl text-secondary italic leading-snug">
-        "TalkAbilities strives to recognize everyone's unique Abilities, while helping individuals grow their communication skills."
-      </p>
-      <div className="w-12 h-1 bg-primary rounded-full mx-auto mt-6" />
+    <section className="relative overflow-hidden bg-secondary/5 py-16">
+      <div className="absolute -top-10 left-8 w-40 h-40 rounded-full bg-primary/10 blob-shape animate-blob pointer-events-none" />
+      <div className="absolute -bottom-12 right-10 w-48 h-48 rounded-full bg-sky/10 blob-shape animate-blob pointer-events-none" style={{ animationDelay: '4s' }} />
+      <Reveal variant="scale" className="relative max-w-3xl mx-auto px-4 text-center">
+        <Quote size={40} className="text-primary mx-auto mb-4" />
+        <p className="font-heading font-semibold text-2xl md:text-3xl text-secondary italic leading-snug">
+          "TalkAbilities strives to recognize everyone's unique Abilities, while helping individuals grow their communication skills."
+        </p>
+        <div className="w-12 h-1.5 bg-primary rounded-full mx-auto mt-6" />
+      </Reveal>
     </section>
   )
 }
@@ -45,6 +48,8 @@ export default function About() {
       <Navbar />
       <main className="flex-1">
         <HeroBanner
+          compact
+          eyebrow="Our Team"
           headline="Meet Our Team"
           subheadline="Dedicated speech-language pathologists serving Knightdale, NC and surrounding areas"
         />
@@ -73,17 +78,17 @@ export default function About() {
         <MissionSection />
 
         {/* CTA */}
-        <section className="bg-secondary/10 py-12 px-4">
-          <div className="max-w-xl mx-auto text-center">
+        <section className="bg-secondary/10 py-14 px-4">
+          <Reveal className="max-w-xl mx-auto text-center">
             <h2 className="font-heading font-bold text-2xl text-secondary">Ready to work with our team?</h2>
             <p className="text-gray-600 mt-2 text-sm">We're accepting new patients. Contact us to schedule a consultation.</p>
             <a
               href="tel:9197045542"
-              className="inline-flex items-center gap-2 mt-5 px-7 py-3 bg-primary text-white rounded-full font-heading font-bold hover:bg-primary-dark transition-colors shadow-md"
+              className="inline-flex items-center gap-2 mt-5 px-7 py-3 bg-primary text-white rounded-full font-heading font-bold hover:bg-primary-dark hover:-translate-y-0.5 transition-all duration-300 shadow-md"
             >
               <Phone size={16} /> Call (919) 704-5542
             </a>
-          </div>
+          </Reveal>
         </section>
       </main>
 

@@ -16,7 +16,7 @@ import { useInView } from '../hooks/useInView'
 function ContactInfoCard() {
   const [ref, visible] = useInView()
   return (
-    <div ref={ref} className={`fade-up bg-white rounded-2xl shadow-md p-7 h-full ${visible ? 'visible' : ''}`}>
+    <div ref={ref} className={`reveal reveal-left ${visible ? 'visible' : ''} bg-white rounded-2xl shadow-md p-7 h-full`}>
       <h2 className="font-heading font-bold text-xl text-secondary mb-5">Get In Touch</h2>
 
       <div className="space-y-4 text-sm text-gray-700">
@@ -84,7 +84,7 @@ function ContactInfoCard() {
 function MapCard() {
   const [ref, visible] = useInView()
   return (
-    <div ref={ref} className={`fade-up rounded-2xl overflow-hidden shadow-md h-full min-h-72 ${visible ? 'visible' : ''}`} style={{ transitionDelay: '150ms' }}>
+    <div ref={ref} className={`reveal reveal-right ${visible ? 'visible' : ''} rounded-2xl overflow-hidden shadow-md h-full min-h-72`} style={{ transitionDelay: '150ms' }}>
       <iframe
         title="TalkAbilities Office Location"
         src="https://maps.google.com/maps?q=405+Knightdale+Station+Run+Ste+121+Knightdale+NC+27545&output=embed&z=15"
@@ -114,7 +114,7 @@ function ContactForm() {
   }
 
   return (
-    <div ref={ref} className={`fade-up bg-white rounded-2xl shadow-md p-7 mt-8 ${visible ? 'visible' : ''}`}>
+    <div ref={ref} className={`reveal reveal-up ${visible ? 'visible' : ''} bg-white rounded-2xl shadow-md p-7 mt-8`}>
       <h2 className="font-heading font-bold text-xl text-secondary mb-5">Send Us a Message</h2>
 
       {submitted ? (
@@ -215,6 +215,8 @@ export default function Contact() {
       <Navbar />
       <main className="flex-1">
         <HeroBanner
+          compact
+          eyebrow="Get In Touch"
           headline="Contact Us"
           subheadline="We'd love to hear from you — reach out to schedule a free screening or evaluation"
         />

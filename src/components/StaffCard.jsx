@@ -6,16 +6,17 @@ export default function StaffCard({ name, credentials, title, photo, bio, delay 
   return (
     <div
       ref={ref}
-      className={`fade-up bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col ${visible ? 'visible' : ''}`}
+      className={`reveal reveal-up ${visible ? 'visible' : ''} group card-hover bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {/* Photo */}
-      <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+      <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
         <img
           src={photo}
           alt={name}
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
         />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
       </div>
 
       {/* Content */}
