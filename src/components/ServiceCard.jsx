@@ -6,12 +6,18 @@ export default function ServiceCard({ Icon, title, description, accentColor = '#
   return (
     <div
       ref={ref}
-      className={`fade-up bg-white rounded-2xl shadow-md overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ${visible ? 'visible' : ''}`}
+      className={`reveal reveal-up ${visible ? 'visible' : ''} group card-hover relative bg-white rounded-2xl shadow-md overflow-hidden flex flex-col`}
       style={{ transitionDelay: `${delay}ms`, borderTop: `4px solid ${accentColor}` }}
     >
-      <div className="p-6 flex flex-col flex-1">
+      {/* Accent glow that blooms on hover */}
+      <div
+        className="absolute -top-10 -right-10 w-28 h-28 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl"
+        style={{ background: accentColor }}
+        aria-hidden="true"
+      />
+      <div className="relative p-6 flex flex-col flex-1">
         <div
-          className="w-12 h-12 rounded-full flex items-center justify-center mb-4 shrink-0"
+          className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
           style={{ backgroundColor: `${accentColor}20` }}
         >
           {Icon && <Icon size={22} style={{ color: accentColor }} />}

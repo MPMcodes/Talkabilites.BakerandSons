@@ -1,4 +1,5 @@
 import { useInView } from '../hooks/useInView'
+import Marquee from './Marquee'
 
 const insurances = [
   'United Health Care – Commercial & Community',
@@ -17,20 +18,18 @@ export default function InsuranceList() {
   const [ref, visible] = useInView()
 
   return (
-    <section ref={ref} className={`fade-up bg-secondary/10 rounded-3xl p-8 md:p-10 ${visible ? 'visible' : ''}`}>
-      <h3 className="font-heading font-bold text-2xl text-secondary text-center mb-6">
+    <section ref={ref} className={`reveal reveal-up ${visible ? 'visible' : ''} bg-secondary/5 rounded-3xl py-8 md:py-10 overflow-hidden`}>
+      <h3 className="font-heading font-bold text-2xl text-secondary text-center mb-6 px-4">
         Insurance Accepted
       </h3>
-      <div className="flex flex-wrap justify-center gap-3">
-        {insurances.map((ins) => (
-          <span
-            key={ins}
-            className="px-4 py-2 bg-secondary text-white rounded-full text-sm font-semibold shadow-sm"
-          >
+      <Marquee
+        items={insurances}
+        renderItem={(ins) => (
+          <span className="px-5 py-2.5 bg-secondary text-white rounded-full text-sm font-semibold shadow-sm whitespace-nowrap">
             {ins}
           </span>
-        ))}
-      </div>
+        )}
+      />
     </section>
   )
 }

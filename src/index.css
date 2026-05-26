@@ -12,6 +12,7 @@
     background-color: #FFFDF5;
     color: #2d2d2d;
     margin: 0;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -27,21 +28,128 @@
     display: flex;
     flex-direction: column;
   }
+
+  ::selection {
+    background-color: #C9A84C;
+    color: #fff;
+  }
 }
 
 @layer utilities {
+  /* ----- Scroll reveal variants ----- */
+  .reveal {
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-up { transform: translateY(34px); }
+  .reveal-down { transform: translateY(-34px); }
+  .reveal-left { transform: translateX(-44px); }
+  .reveal-right { transform: translateX(44px); }
+  .reveal-scale { transform: scale(0.88); }
+  .reveal-zoom { transform: scale(1.06); }
+  .reveal.visible {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+
+  /* Legacy fade-up (kept for compatibility) */
   .fade-up {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
-
   .fade-up.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .fade-up-delay-1 { transition-delay: 0.1s; }
-  .fade-up-delay-2 { transition-delay: 0.2s; }
-  .fade-up-delay-3 { transition-delay: 0.3s; }
+  /* ----- Animated gradient text ----- */
+  .text-gradient {
+    background-image: linear-gradient(100deg, #C9A84C, #E07B5A, #C9A84C);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* ----- Animated mesh-ish gradient background ----- */
+  .animated-gradient {
+    background: linear-gradient(125deg, #0F1E42, #1B3265, #2E4D9E, #1B3265);
+    background-size: 300% 300%;
+    animation: gradient-shift 12s ease infinite;
+  }
+
+  /* ----- Blob mask shape ----- */
+  .blob-shape {
+    border-radius: 42% 58% 63% 37% / 42% 45% 55% 58%;
+  }
+
+  /* ----- Marquee track ----- */
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+  }
+  .marquee-mask:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* ----- Card glow / tilt on hover ----- */
+  .card-hover {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 22px 40px -16px rgba(27, 50, 101, 0.35);
+  }
+
+  /* ----- Soft dotted pattern ----- */
+  .dot-pattern {
+    background-image: radial-gradient(rgba(27, 50, 101, 0.07) 1.5px, transparent 1.5px);
+    background-size: 22px 22px;
+  }
+
+  /* ----- Underline grow for nav ----- */
+  .nav-underline {
+    position: relative;
+  }
+  .nav-underline::after {
+    content: '';
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 6px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .nav-underline:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ----- Respect reduced-motion preferences ----- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

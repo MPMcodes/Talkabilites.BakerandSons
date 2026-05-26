@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Phone } from 'lucide-react'
 
 const LOGO = 'https://images.squarespace-cdn.com/content/v1/5f8397bd8502ed181768b927/be190c52-14f3-42fc-a758-0cc1a282ee09/94AF4A2F-B264-454A-9AD0-B1EE11E19F45.PNG?format=1500w'
 
@@ -33,11 +33,11 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center shrink-0">
+        <Link to="/" className="flex items-center shrink-0 group">
           <img
             src={LOGO}
             alt="TalkAbilities logo"
-            className="h-12 w-auto object-contain"
+            className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </Link>
 
@@ -47,10 +47,10 @@ export default function Navbar() {
             <Link
               key={to}
               to={to}
-              className={`px-4 py-2 rounded-full text-sm font-bold font-heading transition-colors ${
+              className={`nav-underline px-4 py-2 rounded-full text-sm font-bold font-heading transition-colors ${
                 location.pathname === to
                   ? 'bg-primary text-white'
-                  : 'text-gray-700 hover:bg-primary/10 hover:text-primary'
+                  : 'text-gray-700 hover:text-primary'
               }`}
             >
               {label}
@@ -58,8 +58,9 @@ export default function Navbar() {
           ))}
           <a
             href="tel:9197045542"
-            className="ml-3 px-5 py-2 bg-secondary text-white rounded-full text-sm font-bold font-heading hover:bg-secondary-dark transition-colors"
+            className="ml-3 inline-flex items-center gap-2 px-5 py-2 bg-secondary text-white rounded-full text-sm font-bold font-heading hover:bg-secondary-dark hover:-translate-y-0.5 hover:shadow-md transition-all duration-300"
           >
+            <Phone size={15} />
             (919) 704-5542
           </a>
         </div>
